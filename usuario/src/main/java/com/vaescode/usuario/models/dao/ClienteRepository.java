@@ -8,4 +8,9 @@ import com.vaescode.usuario.models.entity.Cliente;
 @Repository
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 
+	//private Long id;
+	//private String nombre;
+	
+	
+	
 }
