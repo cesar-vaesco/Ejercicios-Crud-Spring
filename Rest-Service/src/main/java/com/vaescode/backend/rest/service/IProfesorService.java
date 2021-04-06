@@ -17,11 +17,13 @@ public interface IProfesorService {
 	
 	public Profesor updateProfesor(Profesor profesor);
 	
-	public Optional<Profesor> findProfesorById(Profesor profesor_id);
+	public Optional<Profesor> findProfesorById(Long profesor_id);
 	
 	public void deleteProfesor(Long id);
 	
 	public Profesor findById(Long id);
 	
 	public Profesor findByIdSQL(Long id);
+
+	
 }
