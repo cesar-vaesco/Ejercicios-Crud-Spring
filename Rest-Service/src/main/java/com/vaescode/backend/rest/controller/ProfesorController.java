@@ -1,5 +1,6 @@
 package com.vaescode.backend.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vaescode.backend.rest.entity.Profesor;
+import com.vaescode.backend.rest.mapper.ProfesorMapper;
+import com.vaescode.backend.rest.model.MProfesor;
 import com.vaescode.backend.rest.service.IProfesorService;
 
 @RestController
@@ -83,13 +86,21 @@ public class ProfesorController {
 		}
 	}
 	
+	/* http://localhost:8044/api/login */
 	@PostMapping("/login")
 	public ResponseEntity<?> loginProfesor(@RequestBody Profesor profesor){
 		
 		Profesor profesordb =profesorService.checkPofesorLogin(profesor);
 		
 		if(profesordb != null) {
-			return new ResponseEntity<>(profesordb, HttpStatus.OK); 
+			
+			List<Profesor> profesores = new ArrayList<>();
+			profesores.add(profesordb);
+			
+			List<MProfesor> mProfesores = new ArrayList<>();
+			mProfesores = ProfesorMapper.convertirLista(profesores);
+			
+			return new ResponseEntity<>(mProfesores, HttpStatus.OK); 
 		}else {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
