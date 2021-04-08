@@ -29,6 +29,12 @@ public class ProfesorServiceImpl implements IProfesorService {
 	}
 
 	@Override
+	public void save(Profesor profesor) {
+		profesorDao.save(profesor);
+
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public Profesor checkPofesorLogin(Profesor profesor) {
 		return (Profesor) profesorDao.findByEmailAndPassword(profesor.getEmail(), profesor.getPassword());
@@ -46,11 +52,10 @@ public class ProfesorServiceImpl implements IProfesorService {
 		return (Profesor) profesorDao.save(profesor);
 	}
 
-	
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Profesor> findProfesorById(Long profesor_id) {
-		return (Optional<Profesor>)profesorDao.findById(profesor_id);
+		return (Optional<Profesor>) profesorDao.findById(profesor_id);
 	}
 
 	@Override
@@ -69,6 +74,13 @@ public class ProfesorServiceImpl implements IProfesorService {
 	@Transactional(readOnly = true)
 	public Profesor findByIdSQL(Long id) {
 		return profesorDao.findByIdSQL(id);
+	}
+
+	@Override
+	@Transactional
+	public void deleteAllProfesores() {
+		profesorDao.deleteAll();
+		
 	}
 
 }
